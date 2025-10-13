@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function WeatherType( weather: any ) {
+export function WeatherType(weather: any) {
   if (!weather || !weather[0]) return null;
 
   const main = weather[0].main;
   const iconCode = weather[0].icon;
 
   const isDay = iconCode.includes('d');
-
   switch (main) {
     case 'Clear':
       return isDay ? 'Sunny' : 'Night';
@@ -19,6 +18,12 @@ export function WeatherType( weather: any ) {
       return 'Snow';
     case 'Thunderstorm':
       return 'Storm';
+    case 'Haze':
+      return isDay ? 'Haze Sunny' : 'Haze Night';
+    case 'Mist':
+      return 'Mist';
+    case 'Fog':
+      return 'Fog';
     default:
       return 'Sunny';
   }

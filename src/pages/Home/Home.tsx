@@ -1,21 +1,26 @@
-import { WeatherIcon } from '@/components/WeatherIcon/WeatherIcon';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  getWeatherIcon,
+  getWeatherIconForecast,
+  WeatherIcon,
+  weatherTextMap,
+} from '@/components/WeatherIcon/WeatherIcon';
 import useWeather from '@/hooks/useWeather';
 import { useState } from 'react';
 import { getWeatherGradient } from './clolor';
 import { WeatherType } from '@/helpers/weather.types';
+import useForecast from '@/hooks/useForecast';
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const { weather } = useWeather('Dhaka');
-  console.log(weather);
+  const [searchQuery, setSearchQuery] = useState('Dhaka');
+  const { weather, forecast, fo } = useWeather(searchQuery);
+  const { forecast7days } = useForecast(searchQuery);
+  console.log(forecast7days);
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
   };
 
-  const handleLocationClick = () => {
-    console.log('Get current location');
-  };
+  const handleLocationClick = () => {};
 
   let windKmh = '0';
   if (weather?.wind) {
@@ -267,8 +272,37 @@ const Home = () => {
                 className='flex space-x-4 pb-2'
                 style={{ width: 'max-content' }}
               >
+                {forecast &&
+                  forecast?.map((item, index) => {
+                    const time = new Date(item?.dt_txt).toLocaleTimeString([], {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      hour12: true,
+                    });
+
+                    return (
+                      <div
+                        key={index}
+                        className='flex-shrink-0 bg-white/10 dark:bg-gray-700/30 backdrop-blur-sm rounded-2xl p-4 border border-white/20 dark:border-gray-600/50 hover:bg-white/20 dark:hover:bg-gray-600/30 transition-all duration-200 min-w-[80px]'
+                      >
+                        <div className='text-center'>
+                          <p className='text-white/90 dark:text-gray-300 text-sm font-medium mb-3'>
+                            {time}
+                          </p>
+
+                          <div className='flex justify-center mb-3'>
+                            {getWeatherIcon(item as any, fo)}
+                          </div>
+
+                          <p className='text-white dark:text-gray-200 font-bold text-lg'>
+                            {Math.round(item?.main?.temp as number)}°
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 {/* Generate 24 hourly cards */}
-                {Array.from({ length: 24 }, (_, index) => {
+                {/* {Array.from({ length: 24 }, (_, index) => {
                   const hour = new Date();
                   hour.setHours(hour.getHours() + index);
                   const timeString = hour.toLocaleTimeString('en-US', {
@@ -373,7 +407,7 @@ const Home = () => {
                       </div>
                     </div>
                   );
-                })}
+                })} */}
               </div>
             </div>
           </div>
@@ -389,7 +423,7 @@ const Home = () => {
             </h3>
 
             <div className='space-y-3'>
-              {Array.from({ length: 7 }, (_, index) => {
+              {forecast7days?.time?.map((time: string, index: number) => {
                 const date = new Date();
                 date.setDate(date.getDate() + index);
                 const dayName =
@@ -481,26 +515,36 @@ const Home = () => {
                       {/* Day and Description */}
                       <div className='flex-1'>
                         <p className='text-white dark:text-gray-200 font-semibold text-lg'>
-                          {dayName}
+                          {new Date(time).toLocaleDateString('en-US', {
+                            weekday: 'long',
+                          })}
                         </p>
                         <p className='text-white/70 dark:text-gray-400 text-sm'>
-                          {descriptions[index]}
+                          {weatherTextMap[forecast7days?.weathercode[index]]}
                         </p>
                       </div>
 
                       {/* Weather Icon */}
-                      <div className='flex-shrink-0 mx-6'>
-                        {getWeatherIcon(conditions[index])}
+                      <div className='text-3xl mx-6 flex-shrink-0'>
+                        {getWeatherIconForecast(
+                          forecast7days?.weathercode[index]
+                        )}
                       </div>
 
                       {/* Temperature Range */}
                       <div className='flex-shrink-0 text-right'>
                         <div className='flex items-center space-x-3'>
                           <span className='text-white dark:text-gray-200 font-bold text-xl'>
-                            {highTemps[index]}°
+                            {Math.round(
+                              forecast7days?.temperature_2m_max[index]
+                            )}
+                            °
                           </span>
                           <span className='text-white/60 dark:text-gray-400 text-lg'>
-                            {lowTemps[index]}°
+                            {Math.round(
+                              forecast7days?.temperature_2m_min[index]
+                            )}
+                            °
                           </span>
                         </div>
                       </div>

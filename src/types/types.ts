@@ -158,3 +158,44 @@ export interface OneCallData {
     tags: string[];
   }[];
 }
+
+export interface WeatherForecastItem {
+  dt: number; // Unix timestamp
+  dt_txt: string; // "2025-10-13 12:00:00"
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    sea_level?: number;
+    grnd_level?: number;
+    humidity: number;
+    temp_kf?: number;
+  };
+  weather: {
+    id: number;
+    main: string; // e.g. 'Clear'
+    description: string; // e.g. 'clear sky'
+    icon: string; // e.g. '01n'
+  }[];
+  clouds: {
+    all: number; // cloudiness percentage
+  };
+  wind: {
+    speed: number;
+    deg: number;
+    gust?: number;
+  };
+  visibility: number;
+  pop?: number; // probability of precipitation
+  sys: {
+    pod: string; // part of day ('n' or 'd')
+  };
+}
+export interface Iweather {
+  id: number;
+  main: string; // e.g. 'Clear'
+  description: string; // e.g. 'clear sky'
+  icon: string; // e.g. '01n'
+}

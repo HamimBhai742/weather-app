@@ -1,10 +1,10 @@
 now you focus pages/Home and implement
-Current Weather Section
+Additional Weather Info
 Subtasks:
-• Create main weather display container
-• Add city name display
-• Add current date display
-• Create large temperature display
-• Add weather icon placeholder/area
-• Style the main weather section
+• Create info cards for "feels like" temperature
+• Add humidity display card
+• Add wind speed display card
+• Add precipitation display card
+• Style info cards with consistent design
+
 desing must be morder beautiful  and resposive for all devices ,using(react+talwind css ) my project weather-app desing   follow my command

@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  WiDaySunny,
-  WiNightClear,
-  WiCloud,
-  WiRain,
-  WiSnow,
-  WiThunderstorm,
-} from 'react-icons/wi';
-
+import Night from '../../../lottieFiles/night.json';
+import Sunny from '../../../lottieFiles/sunny.json';
+import Cloudy from '../../../lottieFiles/Cloudy.json';
+import Rainy from '../../../lottieFiles/rainy.json';
+import Snow from '../../../lottieFiles/snow.json';
+import Storm from '../../../lottieFiles/strom.json';
+import Lottie from 'lottie-react';
 export function WeatherIcon({ weather }: { weather: any }) {
   if (!weather || !weather[0]) return null;
 
@@ -18,17 +16,21 @@ export function WeatherIcon({ weather }: { weather: any }) {
 
   switch (main) {
     case 'Clear':
-      return isDay ? <WiDaySunny size={80} /> : <WiNightClear size={80} />;
+      return isDay ? (
+        <Lottie animationData={Sunny} loop={true} />
+      ) : (
+        <Lottie animationData={Night} loop={true} />
+      );
     case 'Clouds':
-      return <WiCloud size={80} />;
+      return <Lottie animationData={Cloudy} loop={true} />;
     case 'Rain':
     case 'Drizzle':
-      return <WiRain size={80} />;
+      return <Lottie animationData={Rainy} loop={true} />;
     case 'Snow':
-      return <WiSnow size={80} />;
+      return <Lottie animationData={Snow} loop={true} />;
     case 'Thunderstorm':
-      return <WiThunderstorm size={80} />;
+      return <Lottie animationData={Storm} loop={true} />;
     default:
-      return <WiDaySunny size={80} />; // fallback
+      return <Lottie animationData={Sunny} loop={true} />;
   }
 }

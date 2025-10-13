@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { WeatherIcon } from '@/components/WeatherIcon/WeatherIcon';
 import useWeather from '@/hooks/useWeather';
 import { useState } from 'react';
 import { getWeatherGradient } from './clolor';
+import { WeatherType } from '@/helpers/weather.types';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -124,7 +124,7 @@ const Home = () => {
               {/* Left Side - Location & Date */}
               <div className='text-center lg:text-left'>
                 <h2 className='text-3xl md:text-4xl font-bold text-white dark:text-gray-100 mb-2'>
-                  New York City
+                  {weather?.name}
                 </h2>
                 <p className='text-lg md:text-xl text-white/80 dark:text-gray-300 font-medium'>
                   {currentDate}
@@ -147,10 +147,10 @@ const Home = () => {
               {/* Right Side - Temperature */}
               <div className='text-center lg:text-right'>
                 <div className='text-6xl md:text-8xl font-bold text-white dark:text-gray-100 mb-2 drop-shadow-lg'>
-                  24°
+                  {Math.round(weather?.main?.temp || 0)}°
                 </div>
                 <p className='text-xl md:text-2xl text-white/90 dark:text-gray-300 font-medium'>
-                  Sunny
+                  {WeatherType(weather?.weather)}
                 </p>
               </div>
             </div>
@@ -171,7 +171,7 @@ const Home = () => {
                       </svg>
                     </div>
                     <span className='text-2xl font-bold text-white'>
-                      {weather?.main?.feels_like}°
+                      {Math.round(weather?.main?.feels_like || 0)}°
                     </span>
                   </div>
                   <p className='text-sm text-white/90 font-medium'>
@@ -216,7 +216,9 @@ const Home = () => {
                         />
                       </svg>
                     </div>
-                    <span className='text-2xl font-bold text-white'>{windKmh}</span>
+                    <span className='text-2xl font-bold text-white'>
+                      {windKmh}
+                    </span>
                   </div>
                   <p className='text-sm text-white/90 font-medium'>Wind km/h</p>
                 </div>
@@ -233,7 +235,14 @@ const Home = () => {
                         <path d='M6 14l3 3v5h6v-5l3-3V9H6v5zm5-12h2v3h-2V2zM3.5 5.875L4.914 4.46l2.12 2.122L5.62 7.997 3.5 5.875zm13.46.71l2.123-2.12 1.414 1.414L18.38 7.997 16.96 6.585zM1 10h3v2H1v-2zm19 0h3v2h-3v-2z' />
                       </svg>
                     </div>
-                    <span className='text-2xl font-bold text-white'>{weather?.rain ? weather.rain["1h"] : weather?.snow ? weather.snow["1h"] : 0}%</span>
+                    <span className='text-2xl font-bold text-white'>
+                      {weather?.rain
+                        ? Math.round((weather.rain['1h'] as number) * 100)
+                        : weather?.snow
+                        ? Math.round((weather.snow['1h'] as number) * 100)
+                        : 0}
+                      %
+                    </span>
                   </div>
                   <p className='text-sm text-white/90 font-medium'>
                     Precipitation

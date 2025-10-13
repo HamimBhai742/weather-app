@@ -15,6 +15,7 @@ export function getWeatherGradient(weather: any) {
         ? "bg-gradient-to-br from-slate-400 via-gray-500 to-blue-600" // cloudy day
         : "bg-gradient-to-br from-gray-800 via-slate-700 to-gray-900"; // cloudy night
     case "Rain":
+      return "bg-gradient-to-br from-blue-500 via-cyan-600 to-teal-700"; // rain
     case "Drizzle":
       return "bg-gradient-to-br from-blue-500 via-cyan-600 to-teal-700"; // rain
     case "Thunderstorm":

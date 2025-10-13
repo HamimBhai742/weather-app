@@ -1,8 +1,8 @@
 const About = () => {
   return (
-    <div style={{ padding: '1rem' }}>
-      <h1>About Page</h1>
-      <p>This is the about page of the weather app.</p>
+    <div className="p-4">
+      <h1 className="text-3xl font-bold text-gray-800">About Page</h1>
+      <p className="mt-4 text-gray-600">This is the about page of the weather app.</p>
     </div>
   );
 };

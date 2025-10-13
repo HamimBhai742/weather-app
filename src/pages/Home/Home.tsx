@@ -287,6 +287,104 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* 7-Day Daily Forecast Section */}
+      <div className="w-full max-w-4xl mt-8">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+          <div className="p-6 md:p-8">
+            <h3 className="text-2xl font-bold text-white mb-6">7-Day Forecast</h3>
+            
+            <div className="space-y-3">
+              {Array.from({ length: 7 }, (_, index) => {
+                const date = new Date();
+                date.setDate(date.getDate() + index);
+                const dayName = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'long' });
+                
+                // Mock weather data for each day
+                const highTemps = [24, 26, 23, 21, 25, 28, 27];
+                const lowTemps = [18, 19, 16, 14, 17, 20, 19];
+                const conditions = ['sunny', 'sunny', 'cloudy', 'rainy', 'sunny', 'sunny', 'cloudy'];
+                const descriptions = ['Sunny', 'Mostly Sunny', 'Partly Cloudy', 'Light Rain', 'Sunny', 'Clear', 'Cloudy'];
+                
+                const getWeatherIcon = (condition: string) => {
+                  switch (condition) {
+                    case 'sunny':
+                      return (
+                        <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
+                          </svg>
+                        </div>
+                      );
+                    case 'cloudy':
+                      return (
+                        <div className="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z"/>
+                          </svg>
+                        </div>
+                      );
+                    case 'rainy':
+                      return (
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2z"/>
+                          </svg>
+                        </div>
+                      );
+                    default:
+                      return (
+                        <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                          <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
+                          </svg>
+                        </div>
+                      );
+                  }
+                };
+
+                return (
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-200"
+                  >
+                    <div className="flex items-center justify-between">
+                      
+                      {/* Day and Description */}
+                      <div className="flex-1">
+                        <p className="text-white font-semibold text-lg">
+                          {dayName}
+                        </p>
+                        <p className="text-white/70 text-sm">
+                          {descriptions[index]}
+                        </p>
+                      </div>
+
+                      {/* Weather Icon */}
+                      <div className="flex-shrink-0 mx-6">
+                        {getWeatherIcon(conditions[index])}
+                      </div>
+
+                      {/* Temperature Range */}
+                      <div className="flex-shrink-0 text-right">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-white font-bold text-xl">
+                            {highTemps[index]}°
+                          </span>
+                          <span className="text-white/60 text-lg">
+                            {lowTemps[index]}°
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

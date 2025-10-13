@@ -1,10 +1,9 @@
 now you focus pages/Home and implement
-Hourly Forecast Section
+ 7-Day Daily Forecast
 Subtasks:
-• Create horizontal scrollable container
-• Design hourly forecast cards (time, icon, temp)
-• Add multiple hourly cards (next 12-24 hours)
-• Style hourly forecast with proper spacing
-
+• Create daily forecast container
+• Design daily forecast cards (day, icon, high/low temps)
+• Add 7 daily forecast cards
+• Style daily forecast section
 
 desing must be morder beautiful  and resposive for all devices ,using(react+talwind css ) my project weather-app desing   follow my command

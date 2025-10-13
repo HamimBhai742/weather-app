@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-
-  const isActive = (path: string) => location.pathname === path;
 
   return (
     <nav className="bg-gradient-to-r from-blue-600 to-purple-700 shadow-lg sticky top-0 z-50">
@@ -24,36 +21,24 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link
+              <NavLink
                 to="/"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActive('/') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 Home
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/about"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActive('/about') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 About
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/contact"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActive('/contact') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 Contact
-              </Link>
+              </NavLink>
             </div>
           </div>
 
@@ -78,39 +63,27 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/10 rounded-lg mt-2">
-              <Link
+              <NavLink
                 to="/"
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                  isActive('/') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 Home
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/about"
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                  isActive('/about') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 About
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                  isActive('/contact') 
-                    ? 'bg-white text-blue-600' 
-                    : 'text-white hover:bg-white/20'
-                }`}
+                className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 text-white hover:bg-white/20"
               >
                 Contact
-              </Link>
+              </NavLink>
             </div>
           </div>
         )}

@@ -208,6 +208,85 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Hourly Forecast Section */}
+      <div className="w-full max-w-4xl mt-8">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+          <div className="p-6 md:p-8">
+            <h3 className="text-2xl font-bold text-white mb-6">24-Hour Forecast</h3>
+            
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex space-x-4 pb-2" style={{ width: 'max-content' }}>
+                
+                {/* Generate 24 hourly cards */}
+                {Array.from({ length: 24 }, (_, index) => {
+                  const hour = new Date();
+                  hour.setHours(hour.getHours() + index);
+                  const timeString = hour.toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    hour12: true 
+                  });
+                  
+                  // Mock weather data for each hour
+                  const temps = [24, 23, 22, 21, 20, 19, 18, 17, 18, 19, 21, 23, 25, 27, 28, 29, 28, 26, 25, 24, 23, 22, 21, 20];
+                  const conditions = ['sunny', 'sunny', 'cloudy', 'cloudy', 'rainy', 'rainy', 'cloudy', 'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'sunny', 'cloudy', 'cloudy', 'sunny', 'sunny', 'sunny', 'cloudy', 'cloudy', 'rainy', 'rainy'];
+                  
+                  const getWeatherIcon = (condition: string) => {
+                    switch (condition) {
+                      case 'sunny':
+                        return (
+                          <svg className="w-8 h-8 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
+                          </svg>
+                        );
+                      case 'cloudy':
+                        return (
+                          <svg className="w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z"/>
+                          </svg>
+                        );
+                      case 'rainy':
+                        return (
+                          <svg className="w-8 h-8 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/>
+                          </svg>
+                        );
+                      default:
+                        return (
+                          <svg className="w-8 h-8 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
+                          </svg>
+                        );
+                    }
+                  };
+
+                  return (
+                    <div
+                      key={index}
+                      className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-200 min-w-[80px]"
+                    >
+                      <div className="text-center">
+                        <p className="text-white/90 text-sm font-medium mb-3">
+                          {index === 0 ? 'Now' : timeString}
+                        </p>
+                        
+                        <div className="flex justify-center mb-3">
+                          {getWeatherIcon(conditions[index])}
+                        </div>
+                        
+                        <p className="text-white font-bold text-lg">
+                          {temps[index]}°
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

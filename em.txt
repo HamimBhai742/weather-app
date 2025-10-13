@@ -1,10 +1,10 @@
 now you focus pages/Home and implement
-Additional Weather Info
+Hourly Forecast Section
 Subtasks:
-• Create info cards for "feels like" temperature
-• Add humidity display card
-• Add wind speed display card
-• Add precipitation display card
-• Style info cards with consistent design
+• Create horizontal scrollable container
+• Design hourly forecast cards (time, icon, temp)
+• Add multiple hourly cards (next 12-24 hours)
+• Style hourly forecast with proper spacing
+
 
 desing must be morder beautiful  and resposive for all devices ,using(react+talwind css ) my project weather-app desing   follow my command

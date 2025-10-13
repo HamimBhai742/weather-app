@@ -21,20 +21,20 @@ const Home = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 dark:from-slate-900 dark:via-gray-900 dark:to-black flex flex-col items-center justify-center px-4 py-8">
       <div className="text-center mb-12">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
+        <h1 className="text-5xl md:text-7xl font-bold text-white dark:text-gray-100 mb-4 drop-shadow-lg">
           Weather App
         </h1>
-        <p className="text-xl md:text-2xl text-white/90 font-light">
+        <p className="text-xl md:text-2xl text-white/90 dark:text-gray-300 font-light">
           Discover weather anywhere in the world
         </p>
       </div>
 
       <div className="w-full max-w-2xl mb-12">
         <form onSubmit={handleSearch} className="relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-sky-300 to-blue-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-          <div className="relative bg-white/20 backdrop-blur-lg rounded-2xl p-2 border border-white/30 shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-sky-300 to-blue-400 dark:from-gray-600 dark:to-gray-700 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div className="relative bg-white/20 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl p-2 border border-white/30 dark:border-gray-600/50 shadow-2xl">
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -68,7 +68,7 @@ const Home = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Enter city name or location..."
-                  className="w-full bg-transparent text-white placeholder-white/70 text-lg md:text-xl px-4 py-4 focus:outline-none font-medium"
+                  className="w-full bg-transparent text-white dark:text-gray-200 placeholder-white/70 dark:placeholder-gray-400 text-lg md:text-xl px-4 py-4 focus:outline-none font-medium"
                 />
               </div>
               
@@ -99,7 +99,7 @@ const Home = () => {
             <button
               key={city}
               onClick={() => setSearchQuery(city)}
-              className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full border border-white/30 hover:bg-white/30 transition-all duration-200 text-sm font-medium shadow-lg"
+              className="bg-white/20 dark:bg-gray-700/50 backdrop-blur-sm text-white dark:text-gray-200 px-4 py-2 rounded-full border border-white/30 dark:border-gray-600/50 hover:bg-white/30 dark:hover:bg-gray-600/50 transition-all duration-200 text-sm font-medium shadow-lg"
             >
               {city}
             </button>
@@ -109,16 +109,16 @@ const Home = () => {
 
       {/* Current Weather Section */}
       <div className="w-full max-w-4xl">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
           <div className="p-8 md:p-12">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
               
               {/* Left Side - Location & Date */}
               <div className="text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-gray-100 mb-2">
                   New York City
                 </h2>
-                <p className="text-lg md:text-xl text-white/80 font-medium">
+                <p className="text-lg md:text-xl text-white/80 dark:text-gray-300 font-medium">
                   {currentDate}
                 </p>
               </div>
@@ -138,17 +138,17 @@ const Home = () => {
 
               {/* Right Side - Temperature */}
               <div className="text-center lg:text-right">
-                <div className="text-6xl md:text-8xl font-bold text-white mb-2 drop-shadow-lg">
+                <div className="text-6xl md:text-8xl font-bold text-white dark:text-gray-100 mb-2 drop-shadow-lg">
                   24°
                 </div>
-                <p className="text-xl md:text-2xl text-white/90 font-medium">
+                <p className="text-xl md:text-2xl text-white/90 dark:text-gray-300 font-medium">
                   Sunny
                 </p>
               </div>
             </div>
 
             {/* Additional Weather Info Cards */}
-            <div className="mt-8 pt-8 border-t border-white/20">
+            <div className="mt-8 pt-8 border-t border-white/20 dark:border-gray-700/50">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* Feels Like Card */}
@@ -211,9 +211,9 @@ const Home = () => {
 
       {/* Hourly Forecast Section */}
       <div className="w-full max-w-4xl mt-8">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
           <div className="p-6 md:p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">24-Hour Forecast</h3>
+            <h3 className="text-2xl font-bold text-white dark:text-gray-100 mb-6">24-Hour Forecast</h3>
             
             <div className="overflow-x-auto scrollbar-hide">
               <div className="flex space-x-4 pb-2" style={{ width: 'max-content' }}>
@@ -263,10 +263,10 @@ const Home = () => {
                   return (
                     <div
                       key={index}
-                      className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-200 min-w-[80px]"
+                      className="flex-shrink-0 bg-white/10 dark:bg-gray-700/30 backdrop-blur-sm rounded-2xl p-4 border border-white/20 dark:border-gray-600/50 hover:bg-white/20 dark:hover:bg-gray-600/30 transition-all duration-200 min-w-[80px]"
                     >
                       <div className="text-center">
-                        <p className="text-white/90 text-sm font-medium mb-3">
+                        <p className="text-white/90 dark:text-gray-300 text-sm font-medium mb-3">
                           {index === 0 ? 'Now' : timeString}
                         </p>
                         
@@ -274,7 +274,7 @@ const Home = () => {
                           {getWeatherIcon(conditions[index])}
                         </div>
                         
-                        <p className="text-white font-bold text-lg">
+                        <p className="text-white dark:text-gray-200 font-bold text-lg">
                           {temps[index]}°
                         </p>
                       </div>
@@ -290,9 +290,9 @@ const Home = () => {
 
       {/* 7-Day Daily Forecast Section */}
       <div className="w-full max-w-4xl mt-8">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div className="bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
           <div className="p-6 md:p-8">
-            <h3 className="text-2xl font-bold text-white mb-6">7-Day Forecast</h3>
+            <h3 className="text-2xl font-bold text-white dark:text-gray-100 mb-6">7-Day Forecast</h3>
             
             <div className="space-y-3">
               {Array.from({ length: 7 }, (_, index) => {
@@ -346,16 +346,16 @@ const Home = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/20 transition-all duration-200"
+                    className="bg-white/10 dark:bg-gray-700/30 backdrop-blur-sm rounded-2xl p-4 border border-white/20 dark:border-gray-600/50 hover:bg-white/20 dark:hover:bg-gray-600/30 transition-all duration-200"
                   >
                     <div className="flex items-center justify-between">
                       
                       {/* Day and Description */}
                       <div className="flex-1">
-                        <p className="text-white font-semibold text-lg">
+                        <p className="text-white dark:text-gray-200 font-semibold text-lg">
                           {dayName}
                         </p>
-                        <p className="text-white/70 text-sm">
+                        <p className="text-white/70 dark:text-gray-400 text-sm">
                           {descriptions[index]}
                         </p>
                       </div>
@@ -368,10 +368,10 @@ const Home = () => {
                       {/* Temperature Range */}
                       <div className="flex-shrink-0 text-right">
                         <div className="flex items-center space-x-3">
-                          <span className="text-white font-bold text-xl">
+                          <span className="text-white dark:text-gray-200 font-bold text-xl">
                             {highTemps[index]}°
                           </span>
-                          <span className="text-white/60 text-lg">
+                          <span className="text-white/60 dark:text-gray-400 text-lg">
                             {lowTemps[index]}°
                           </span>
                         </div>

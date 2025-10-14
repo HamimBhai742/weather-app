@@ -6,8 +6,9 @@ import type { IHourlyForecastCard } from '@/types/types';
 import Forecast7DaysCard from '@/components/forecast7days/Forecast7Days';
 import CurrentWeatherSection from '@/components/CurrentWeatherSection/CurrentWeatherSection';
 import Search from '@/components/Searchbar/Search';
-import WeatherCardSkeleton from '@/components/lodingSkeleton/WeatherCardSkeleton';
 import HourlyForecastSkeleton from '@/components/lodingSkeleton/HourlyForecastSkeleton';
+import WeeklyForecastSkeleton from '@/components/lodingSkeleton/WeeklyForecastSkeleton';
+import MainWeatherSkeleton from '@/components/lodingSkeleton/WeatherCardSkeleton';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,7 +68,7 @@ const Home = () => {
 
       {/* Current Weather Section */}
       {loadingWeather ? (
-        <WeatherCardSkeleton />
+        <MainWeatherSkeleton />
       ) : (
         <CurrentWeatherSection
           weather={weather}
@@ -116,7 +117,11 @@ const Home = () => {
               7-Day Forecast
             </h3>
 
-            <div className='space-y-3'>
+            {
+              loading ? (
+                <WeeklyForecastSkeleton />
+              ) : (
+              <div className='space-y-3'>
               {forecast7days?.time?.map((time: string, index: number) => (
                 <Forecast7DaysCard
                   key={index}
@@ -126,6 +131,8 @@ const Home = () => {
                 />
               ))}
             </div>
+              )
+            }
           </div>
         </div>
       </div>

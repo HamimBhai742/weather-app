@@ -515,9 +515,21 @@ const Home = () => {
                       {/* Day and Description */}
                       <div className='flex-1'>
                         <p className='text-white dark:text-gray-200 font-semibold text-lg'>
-                          {new Date(time).toLocaleDateString('en-US', {
-                            weekday: 'long',
-                          })}
+                          {(() => {
+                            const date = new Date(time);
+                            const today = new Date();
+
+                            const isToday =
+                              date.getDate() === today.getDate() &&
+                              date.getMonth() === today.getMonth() &&
+                              date.getFullYear() === today.getFullYear();
+
+                            return isToday
+                              ? 'Today'
+                              : date.toLocaleDateString('en-US', {
+                                  weekday: 'long',
+                                });
+                          })()}
                         </p>
                         <p className='text-white/70 dark:text-gray-400 text-sm'>
                           {weatherTextMap[forecast7days?.weathercode[index]]}

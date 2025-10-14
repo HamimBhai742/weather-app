@@ -63,7 +63,7 @@ A modern, responsive weather application built with React, TypeScript, and Tailw
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Add your OpenWeatherMap API key:
    ```env
    VITE_WEATHER_API_KEY=your_api_key_here
@@ -149,28 +149,6 @@ weather-app/
 - **Desktop Enhanced** - Full-featured desktop experience
 - **Touch Friendly** - Large touch targets and gestures
 
-## 🔮 Future Enhancements
-
-- [ ] Weather alerts and notifications
-- [ ] Geolocation-based weather
-- [ ] Weather radar overlay
-- [ ] Historical weather data
-- [ ] Weather widgets
-- [ ] PWA support
-- [ ] Offline functionality
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - [OpenWeatherMap](https://openweathermap.org/) for weather data API
@@ -185,4 +163,4 @@ If you have any questions or need help, please open an issue or contact the main
 
 ---
 
-Made with ❤️ and ☀️ by [Your Name]
+Made with ❤️ and ☀️ by Hamim

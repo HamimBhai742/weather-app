@@ -199,3 +199,31 @@ export interface Iweather {
   description: string; // e.g. 'clear sky'
   icon: string; // e.g. '01n'
 }
+
+export interface IHourlyForecastCard {
+  condition: number;
+  isDay: boolean;
+  temp: number;
+  time: Date;
+}
+
+export interface IForecast7DaysCard {
+  time: string[]; // ['2025-10-14', ...]
+  temperature_2m_max: number[]; // [31.4, 31.2, ...]
+  temperature_2m_min: number[]; // [23.8, 22.1, ...]
+  precipitation_sum: number[]; // [0, 0, 0, 0.3, ...]
+  weathercode: number[]; // [2, 1, 2, 2, 45, 80, 3]
+}
+
+export interface ISun {
+  time: string[];
+  sunrise: string[];
+  sunset: string[];
+}
+
+export interface IHourlyForecast{
+  time: string[]; // ['2025-10-14', ...]
+  temperature_2m: number[]; // [31.4, 31.2, ...]
+  precipitation: number[]; // [0, 0, 0, 0.3, ...]
+  weathercode: number[]; // [2, 1, 2, 2, 45, 80, 3]
+}

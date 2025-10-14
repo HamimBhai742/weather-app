@@ -1,9 +1,2 @@
-now you focus pages/Home and implement
- 7-Day Daily Forecast
-Subtasks:
-• Create daily forecast container
-• Design daily forecast cards (day, icon, high/low temps)
-• Add 7 daily forecast cards
-• Style daily forecast section
-
+now you focus pages/Map and implement full world map then
 desing must be morder beautiful  and resposive for all devices ,using(react+talwind css ) my project weather-app desing   follow my command

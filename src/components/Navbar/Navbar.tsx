@@ -61,6 +61,18 @@ const Navbar = () => {
                 About
               </NavLink>
               <NavLink
+                to='/map'
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-white/20 text-white shadow-lg backdrop-blur-sm'
+                      : 'text-white/90 hover:bg-white/10 hover:text-white'
+                  }`
+                }
+              >
+                Map
+              </NavLink>
+              <NavLink
                 to='/contact'
                 className={({ isActive }) =>
                   `px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${

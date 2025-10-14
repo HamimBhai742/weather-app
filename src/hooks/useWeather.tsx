@@ -20,6 +20,8 @@ export default function useWeather(city = 'Dhaka') {
     } catch (err: any) {
       console.log(err);
       setErr(err?.message);
+    } finally {
+      setLoadingWeather(false);
     }
   };
 
@@ -27,5 +29,5 @@ export default function useWeather(city = 'Dhaka') {
     fetchWeather();
   }, [city]);
 
-  return { weather, err,loadingWeather };
+  return { weather, err, loadingWeather };
 }

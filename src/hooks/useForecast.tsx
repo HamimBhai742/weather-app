@@ -27,11 +27,13 @@ export default function useForecast(city = 'Dhaka') {
     } catch (error) {
       setLoading(false);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchForecast();
   }, [city]);
-  return { forecast7days, hourlyForecast, sun,loading };
+  return { forecast7days, hourlyForecast, sun, loading };
 }

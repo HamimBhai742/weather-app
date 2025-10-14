@@ -54,14 +54,14 @@ const Home = () => {
   //   return <p className='text-white min-h-screen bg-green-600'>Loading...</p>;
   return (
     <div className='min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 dark:from-slate-900 dark:via-gray-900 dark:to-black flex flex-col items-center justify-center px-4 py-8'>
-      <div className='text-center mb-12'>
+      {/* <div className='text-center mb-12'>
         <h1 className='text-5xl md:text-7xl font-bold text-white dark:text-gray-100 mb-4 drop-shadow-lg'>
           Weather App
         </h1>
         <p className='text-xl md:text-2xl text-white/90 dark:text-gray-300 font-light'>
           Discover weather anywhere in the world
         </p>
-      </div>
+      </div> */}
 
       {/* Weather Search Section */}
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />

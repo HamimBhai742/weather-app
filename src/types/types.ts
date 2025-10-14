@@ -1,3 +1,4 @@
+
 export interface WeatherResponse {
   coord: {
     lon: number;
@@ -227,3 +228,4 @@ export interface IHourlyForecast{
   precipitation: number[]; // [0, 0, 0, 0.3, ...]
   weathercode: number[]; // [2, 1, 2, 2, 45, 80, 3]
 }
+

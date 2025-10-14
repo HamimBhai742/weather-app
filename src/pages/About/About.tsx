@@ -1,4 +1,4 @@
-import {  Sun, CloudRain, Wind, Eye, Thermometer } from 'lucide-react';
+import { Sun, Wind, Eye, Thermometer } from 'lucide-react';
 import Sunny from '../../../lottieFiles/sunny.json';
 import Night from '../../../lottieFiles/night.json';
 import Lottie from 'lottie-react';
@@ -34,12 +34,11 @@ const About = () => {
         {/* Hero Section */}
         <div className='text-center mb-16'>
           <div className='flex justify-center mb-6'>
-           {
-            isDay?
-            <Lottie animationData={Sunny} className='w-32 h-32' loop={true} />
-            :
-            <Lottie animationData={Night} className='w-32 h-32' loop={true} />
-           }
+            {isDay ? (
+              <Lottie animationData={Sunny} className='w-32 h-32' loop={true} />
+            ) : (
+              <Lottie animationData={Night} className='w-32 h-32' loop={true} />
+            )}
           </div>
           <h1 className='text-3xl md:text-5xl font-bold text-white dark:text-gray-100 mb-6 drop-shadow-lg'>
             About Weather App
@@ -114,21 +113,6 @@ const About = () => {
             </div>
             <div className='text-white/80 dark:text-gray-300'>Live Updates</div>
           </div>
-        </div>
-
-        {/* Contact Section */}
-        <div className='bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8 md:p-12 text-center'>
-          <CloudRain className='w-16 h-16 text-white/80 mx-auto mb-6' />
-          <h2 className='text-3xl md:text-4xl font-bold text-white dark:text-gray-100 mb-4'>
-            Stay Connected
-          </h2>
-          <p className='text-lg text-white/90 dark:text-gray-300 mb-6 max-w-2xl mx-auto'>
-            Have questions or suggestions? We'd love to hear from you. Help us
-            make weather forecasting better for everyone.
-          </p>
-          <button className='bg-white/20 hover:bg-white/30 dark:bg-gray-700/50 dark:hover:bg-gray-700/70 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 border border-white/30'>
-            Get in Touch
-          </button>
         </div>
       </div>
     </div>

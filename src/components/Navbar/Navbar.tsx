@@ -72,27 +72,12 @@ const Navbar = () => {
               >
                 Map
               </NavLink>
-              <NavLink
-                to='/contact'
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-white/20 text-white shadow-lg backdrop-blur-sm'
-                      : 'text-white/90 hover:bg-white/10 hover:text-white'
-                  }`
-                }
-              >
-                Contact
-              </NavLink>
             </div>
           </div>
 
           {/* Weather Info Badge */}
           <div className='flex items-center space-x-3'>
-            <div>
-              <ModeToggle />
-            </div>
-            <div className='hidden lg:flex items-center space-x-3'>
+            <div className='hidden md:flex items-center space-x-3'>
               <div className='bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20'>
                 <span className='text-white/90 flex items-center gap-1 text-sm font-medium'>
                   <span>
@@ -101,6 +86,9 @@ const Navbar = () => {
                   {DigitalClock()}
                 </span>
               </div>
+            </div>
+            <div>
+              <ModeToggle />
             </div>
           </div>
 
@@ -167,7 +155,7 @@ const Navbar = () => {
                 About
               </NavLink>
               <NavLink
-                to='/contact'
+                to='/map'
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
@@ -177,17 +165,8 @@ const Navbar = () => {
                   }`
                 }
               >
-                Contact
+                Map
               </NavLink>
-
-              {/* Mobile Weather Info */}
-              <div className='pt-2 mt-2 border-t border-white/20'>
-                <div className='bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20'>
-                  <span className='text-white/90 text-sm font-medium'>
-                    Current: 24°C
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         )}

@@ -50,6 +50,21 @@ export interface WeatherResponse {
   cod: number;
 }
 
+export interface Weather {
+  city: string;
+  temp: number;
+  weatherCode: number;
+  humidity: number;
+  feel_like: number;
+  windSpeed: number;
+  precipitation: number;
+  sunrise: string;
+  sunset: string;
+  isDay: boolean;
+  currentDate: string;
+}
+
+
 // One Call API (hourly/daily forecast)
 export interface OneCallData {
   lat: number;

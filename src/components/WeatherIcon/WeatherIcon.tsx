@@ -8,44 +8,46 @@ import Snow from '../../../lottieFiles/snow.json';
 import Storm from '../../../lottieFiles/strom.json';
 import HazeNight from '../../../lottieFiles/hazenight.json';
 import HazeDay from '../../../lottieFiles/hazeday.json';
+import Drizzle from '../../../lottieFiles/drizzle.json';
+import Cloudynight from '../../../lottieFiles/cloudynight.json';
+import Cloudyday from '../../../lottieFiles/cloudyday.json';
 import Lottie from 'lottie-react';
-export function WeatherIcon({ weather }: { weather: any }) {
-  if (!weather || !weather[0]) return null;
-
-  const main = weather[0].main;
-  const iconCode = weather[0].icon; // "01d", "02n", etc.
-
-  const isDay = iconCode.includes('d');
-
-  switch (main) {
-    case 'Clear':
-      return isDay ? (
-        <Lottie animationData={Sunny} loop={true} />
-      ) : (
-        <Lottie animationData={Night} loop={true} />
-      );
-    case 'Clouds':
-      return <Lottie animationData={Cloudy} loop={true} />;
-    case 'Rain':
-      return <Lottie animationData={Rainy} loop={true} />;
-    case 'Drizzle':
-      return <Lottie animationData={Rainy} loop={true} />;
-    case 'Snow':
-      return <Lottie animationData={Snow} loop={true} />;
-    case 'Thunderstorm':
-      return <Lottie animationData={Storm} loop={true} />;
-    case 'Haze':
-      return isDay ? (
-        <Lottie animationData={HazeDay} loop={true} />
-      ) : (
-        <Lottie animationData={HazeNight} loop={true} />
-      );
-    case 'Mist':
-      return <Lottie animationData={Cloudy} loop={true} />;
-    case 'Fog':
-      return <Lottie animationData={Cloudy} loop={true} />;
-    default:
-      return <Lottie animationData={Sunny} loop={true} />;
+import type { Weather } from '@/types/types';
+export function WeatherIcon({ weather }: { weather: Weather }) {
+  if (weather?.weatherCode === 0) {
+    return weather.isDay ? (
+      <Lottie animationData={Sunny} loop={true} />
+    ) : (
+      <Lottie animationData={Night} loop={true} />
+    );
+  } else if ([1, 2].includes(weather.weatherCode)) {
+    return weather.isDay ? (
+      <Lottie animationData={Cloudyday} loop={true} />
+    ) : (
+      <Lottie animationData={Cloudynight} loop={true} />
+    );
+  } else if ([3].includes(weather.weatherCode)) {
+    return <Lottie animationData={Cloudy} loop={true} />;
+  } else if (
+    [51, 53, 55, 56, 57, 61, 80, 81, 82].includes(weather.weatherCode)
+  ) {
+    return <Lottie animationData={Drizzle} loop={true} />;
+  } else if ([63, 65, 66, 67].includes(weather?.weatherCode)) {
+    return <Lottie animationData={Rainy} loop={true} />;
+  } else if ([71, 73, 75, 77, 85, 86].includes(weather?.weatherCode)) {
+    return <Lottie animationData={Snow} loop={true} />;
+  } else if ([95, 96, 99].includes(weather?.weatherCode)) {
+    return <Lottie animationData={Storm} loop={true} />;
+  } else if ([45].includes(weather?.weatherCode)) {
+    return weather?.isDay ? (
+      <Lottie animationData={HazeDay} loop={true} />
+    ) : (
+      <Lottie animationData={HazeNight} loop={true} />
+    );
+  } else if ([48].includes(weather?.weatherCode)) {
+    return <Lottie animationData={Cloudy} loop={true} />;
+  } else {
+    return <Lottie animationData={Sunny} loop={true} />;
   }
 }
 
@@ -164,14 +166,6 @@ export const weatherTextMap: Record<number, string> = {
 };
 
 export const getWeatherMapCode = (code: number, isDay: boolean) => {
-  // const hour = new Date().getHours();
-  // console.log(
-  //   new Date(sun.sunrise[0]).getHours(),
-  //   new Date(sun.sunset[0]).getHours()
-  // );
-  // const isDay =
-  //   hour >= new Date(sun.sunrise[0]).getHours() &&
-  //   hour <= new Date(sun.sunset[0]).getHours();
   switch (code) {
     case 0:
       return isDay ? '☀️' : '🌙';
@@ -232,4 +226,17 @@ export const getWeatherMapCode = (code: number, isDay: boolean) => {
     default:
       return '❓'; // Unknown
   }
+};
+
+export const getWeatherText = (code: number, isDay: boolean): string => {
+  if (code === 0) return isDay ? 'Sunny' : 'Night';
+  if ([1, 2].includes(code)) return isDay ? 'Gloomy Day' : 'Gloomy Night';
+  if ([3].includes(code)) return 'Cloudy';
+  if ([45, 48].includes(code)) return 'Foggy';
+  if ([51, 53, 55, 56, 57].includes(code)) return 'Drizzle';
+  if ([61, 63, 65, 80, 81, 82].includes(code)) return 'Rainy';
+  if ([66, 67].includes(code)) return 'Freezing Rain';
+  if ([71, 73, 75, 85, 86, 77].includes(code)) return 'Snowy';
+  if ([95, 96, 99].includes(code)) return 'Thunderstorm';
+  return 'Unknown';
 };

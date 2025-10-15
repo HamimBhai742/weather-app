@@ -2,7 +2,7 @@ import useWeather from '@/hooks/useWeather';
 import { useState } from 'react';
 import useForecast from '@/hooks/useForecast';
 import HourlyForecastCard from '@/components/hourlyForcastCard/HourlyForestCard';
-import type { IHourlyForecastCard } from '@/types/types';
+import type { IHourlyForecastCard, Weather } from '@/types/types';
 import Forecast7DaysCard from '@/components/forecast7days/Forecast7Days';
 import CurrentWeatherSection from '@/components/CurrentWeatherSection/CurrentWeatherSection';
 import Search from '@/components/Searchbar/Search';
@@ -11,22 +11,11 @@ import WeeklyForecastSkeleton from '@/components/lodingSkeleton/WeeklyForecastSk
 import MainWeatherSkeleton from '@/components/lodingSkeleton/WeatherCardSkeleton';
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const { weather, loadingWeather } = useWeather(searchQuery || 'Dhaka');
-  const { forecast7days, hourlyForecast, sun, loading } = useForecast(
-    searchQuery || 'Dhaka'
-  );
-  let windKmh = '0';
-  if (weather?.wind) {
-    windKmh = (weather?.wind.speed * 3.6).toFixed(1);
-  }
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
+  const [searchQuery, setSearchQuery] = useState('Dhaka');
+  const { loadingWeather, we } = useWeather(searchQuery);
+  const { forecast7days, hourlyForecast, sun, loading } =
+    useForecast(searchQuery);
+  console.log(searchQuery);
   const now = new Date();
   const currentHour = new Date(now);
   currentHour.setMinutes(0, 0, 0);
@@ -50,31 +39,18 @@ const Home = () => {
     })
     .slice(0, 24);
 
-  // if (loading || loadingWeather)
-  //   return <p className='text-white min-h-screen bg-green-600'>Loading...</p>;
+  console.log(searchQuery, 'searchQuery');
+  console.log(we);
   return (
     <div className='min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 dark:from-slate-900 dark:via-gray-900 dark:to-black flex flex-col items-center justify-center px-4 py-8'>
-      {/* <div className='text-center mb-12'>
-        <h1 className='text-5xl md:text-7xl font-bold text-white dark:text-gray-100 mb-4 drop-shadow-lg'>
-          Weather App
-        </h1>
-        <p className='text-xl md:text-2xl text-white/90 dark:text-gray-300 font-light'>
-          Discover weather anywhere in the world
-        </p>
-      </div> */}
-
       {/* Weather Search Section */}
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Search setSearchQuery={setSearchQuery} />
 
       {/* Current Weather Section */}
       {loadingWeather ? (
         <MainWeatherSkeleton />
       ) : (
-        <CurrentWeatherSection
-          weather={weather}
-          currentDate={currentDate}
-          windKmh={windKmh}
-        />
+        <CurrentWeatherSection weather={we as Weather} />
       )}
 
       {/* Hourly Forecast Section */}
@@ -117,22 +93,20 @@ const Home = () => {
               7-Day Forecast
             </h3>
 
-            {
-              loading ? (
-                <WeeklyForecastSkeleton />
-              ) : (
+            {loading ? (
+              <WeeklyForecastSkeleton />
+            ) : (
               <div className='space-y-3'>
-              {forecast7days?.time?.map((time: string, index: number) => (
-                <Forecast7DaysCard
-                  key={index}
-                  time={time}
-                  index={index}
-                  forecast7days={forecast7days}
-                />
-              ))}
-            </div>
-              )
-            }
+                {forecast7days?.time?.map((time: string, index: number) => (
+                  <Forecast7DaysCard
+                    key={index}
+                    time={time}
+                    index={index}
+                    forecast7days={forecast7days}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { WeatherType } from '@/helpers/weather.types';
-import { WeatherIcon } from '../WeatherIcon/WeatherIcon';
-import { getWeatherGradient } from '@/pages/Home/clolor';
+import { getWeatherText, WeatherIcon } from '../WeatherIcon/WeatherIcon';
+import { getWeatherGradient } from '@/helpers/clolor';
+import type { Weather } from '@/types/types';
 
 const CurrentWeatherSection = ({
   weather,
-  currentDate,
-  windKmh,
-}: {
-  weather: any;
-  currentDate: string;
-  windKmh: string;
+}: // currentDate,
+// windKmh,
+{
+  weather: Weather;
+  // currentDate: string;
+  // windKmh: string;
 }) => {
   return (
     <div className='w-full max-w-4xl'>
@@ -20,10 +19,10 @@ const CurrentWeatherSection = ({
             {/* Left Side - Location & Date */}
             <div className='text-center lg:text-left'>
               <h2 className='text-3xl md:text-4xl font-bold text-white dark:text-gray-100 mb-2'>
-                {weather?.name}
+                {weather?.city}
               </h2>
               <p className='text-lg md:text-xl text-white/80 dark:text-gray-300 font-medium'>
-                {currentDate}
+                {weather?.currentDate}
               </p>
             </div>
 
@@ -31,22 +30,20 @@ const CurrentWeatherSection = ({
             <div className='flex-shrink-0'>
               <div
                 className={`w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center shadow-2xl animate-pulse ${getWeatherGradient(
-                  weather?.weather
+                  weather
                 )}`}
               >
-                {weather?.weather?.[0]?.icon && (
-                  <WeatherIcon weather={weather.weather} />
-                )}
+                {weather && <WeatherIcon weather={weather} />}
               </div>
             </div>
 
             {/* Right Side - Temperature */}
             <div className='text-center lg:text-right'>
               <div className='text-6xl md:text-8xl font-bold text-white dark:text-gray-100 mb-2 drop-shadow-lg'>
-                {Math.round(weather?.main?.temp || 0)}°
+                {Math.round(weather?.temp || 0)}°C
               </div>
               <p className='text-xl md:text-2xl text-white/90 dark:text-gray-300 font-medium'>
-                {WeatherType(weather?.weather)}
+                {getWeatherText(weather?.weatherCode, weather?.isDay)}
               </p>
             </div>
           </div>
@@ -67,7 +64,7 @@ const CurrentWeatherSection = ({
                     </svg>
                   </div>
                   <span className='text-2xl font-bold text-white'>
-                    {Math.round(weather?.main?.feels_like || 0)}°
+                    {Math.round(weather?.feel_like || 0)}°
                   </span>
                 </div>
                 <p className='text-sm text-white/90 font-medium'>Feels like</p>
@@ -86,7 +83,7 @@ const CurrentWeatherSection = ({
                     </svg>
                   </div>
                   <span className='text-2xl font-bold text-white'>
-                    {weather?.main?.humidity}%
+                    {weather?.humidity}%
                   </span>
                 </div>
                 <p className='text-sm text-white/90 font-medium'>Humidity</p>
@@ -111,7 +108,7 @@ const CurrentWeatherSection = ({
                     </svg>
                   </div>
                   <span className='text-2xl font-bold text-white'>
-                    {windKmh}
+                    {weather?.windSpeed}
                   </span>
                 </div>
                 <p className='text-sm text-white/90 font-medium'>Wind km/h</p>
@@ -130,12 +127,7 @@ const CurrentWeatherSection = ({
                     </svg>
                   </div>
                   <span className='text-2xl font-bold text-white'>
-                    {weather?.rain
-                      ? Math.round((weather.rain['1h'] as number) * 100)
-                      : weather?.snow
-                      ? Math.round((weather.snow['1h'] as number) * 100)
-                      : 0}
-                    %
+                    {Math.round(weather?.precipitation * 100)}%
                   </span>
                 </div>
                 <p className='text-sm text-white/90 font-medium'>

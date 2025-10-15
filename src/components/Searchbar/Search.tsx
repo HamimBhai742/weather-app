@@ -1,15 +1,20 @@
 import { FaMapPin } from 'react-icons/fa';
 
 const Search = ({
-  searchQuery,
   setSearchQuery,
 }: {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  setSearchQuery: (query: string) => void;
 }) => {
+  const handleSearch = () => {
+    const searchItem = document.getElementById('search');
+    if (searchItem instanceof HTMLInputElement) {
+      const val = searchItem.value;
+      setSearchQuery(val);
+    }
+  };
   return (
     <div className='w-full max-w-2xl mb-12'>
-      <form className='relative group'>
+      <div className='relative group'>
         <div className='absolute inset-0 bg-gradient-to-r from-sky-300 to-blue-400 dark:from-gray-600 dark:to-gray-700 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300'></div>
         <div className='relative bg-white/20 dark:bg-gray-800/50 backdrop-blur-lg rounded-2xl p-2 border border-white/30 dark:border-gray-600/50 shadow-2xl'>
           <div className='flex items-center gap-2'>
@@ -41,22 +46,23 @@ const Search = ({
             <div className='flex-1'>
               <input
                 type='text'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                id='search'
                 placeholder='Enter city name or location...'
                 className='w-full bg-transparent text-white dark:text-gray-200 placeholder-white/70 dark:placeholder-gray-400 text-lg md:text-xl px-4 py-4 focus:outline-none font-medium'
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               />
             </div>
 
             <button
-              type='submit'
+              onClick={handleSearch}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
               className='bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white p-4 rounded-xl transition-all duration-200 shadow-lg'
             >
               <FaMapPin className='w-6 h-6 text-red-600 animate-pulse' />
             </button>
           </div>
         </div>
-      </form>
+      </div>
 
       <div className='mt-8 flex flex-wrap justify-center gap-3'>
         {[
@@ -74,7 +80,7 @@ const Search = ({
           <button
             key={city}
             onClick={() => setSearchQuery(city)}
-            className='bg-white/20 dark:bg-gray-700/50 backdrop-blur-sm text-white dark:text-gray-200 px-4 py-2 rounded-full border border-white/30 dark:border-gray-600/50 hover:bg-white/30 dark:hover:bg-gray-600/50 transition-all duration-200 text-sm font-medium shadow-lg'
+            className='bg-white/20 hover:cursor-pointer dark:bg-gray-700/50 backdrop-blur-sm text-white dark:text-gray-200 px-4 py-2 rounded-full border border-white/30 dark:border-gray-600/50 hover:bg-white/30 dark:hover:bg-gray-600/50 transition-all duration-200 text-sm font-medium shadow-lg'
           >
             {city}
           </button>

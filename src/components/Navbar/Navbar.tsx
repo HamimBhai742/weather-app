@@ -87,13 +87,16 @@ const Navbar = () => {
                 </span>
               </div>
             </div>
-            <div>
+            <div className='max-sm:hidden'>
               <ModeToggle />
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className='md:hidden'>
+          <div className='md:hidden flex items-center gap-4'>
+            <div>
+              <ModeToggle />
+            </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className='text-white hover:bg-white/20 p-2 rounded-xl transition-all duration-200 backdrop-blur-sm'

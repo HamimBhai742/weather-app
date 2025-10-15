@@ -2,15 +2,7 @@ import { getWeatherText, WeatherIcon } from '../WeatherIcon/WeatherIcon';
 import { getWeatherGradient } from '@/helpers/clolor';
 import type { Weather } from '@/types/types';
 
-const CurrentWeatherSection = ({
-  weather,
-}: // currentDate,
-// windKmh,
-{
-  weather: Weather;
-  // currentDate: string;
-  // windKmh: string;
-}) => {
+const CurrentWeatherSection = ({ weather }: { weather: Weather }) => {
   return (
     <div className='w-full max-w-4xl'>
       <div className='bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden'>

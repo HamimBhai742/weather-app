@@ -5,9 +5,7 @@ import axios from 'axios';
 import type { Weather } from '@/types/types';
 import { getCoordinates } from '@/helpers/getTimeZone';
 
-// const OPEN_WEATHER = import.meta.env.VITE_WEATHER_API_KEY;
 export default function useWeather(city = 'Dhaka') {
-  // const [weather, setWeather] = useState<WeatherResponse | null>(null);
   const [we, setWe] = useState<Weather | null>(null);
   const [loadingWeather, setLoadingWeather] = useState(false);
   const [err, setErr] = useState(null);
@@ -22,10 +20,6 @@ export default function useWeather(city = 'Dhaka') {
   const fetchWeather = async () => {
     setLoadingWeather(true);
     try {
-      // const res = await axios.get(
-      //   `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${OPEN_WEATHER}`
-      // );
-
       const { lat, lon, timezone } = await getCoordinates(city);
       const r = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weathercode,wind_speed_10m,wind_direction_10m,is_day&daily=sunrise,sunset&timezone=${timezone}`
@@ -45,7 +39,6 @@ export default function useWeather(city = 'Dhaka') {
       };
       console.log(wea);
       setWe(wea);
-      // setWeather(res?.data);
       setLoadingWeather(false);
     } catch (err: any) {
       console.log(err);

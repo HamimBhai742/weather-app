@@ -25,7 +25,6 @@ export default function useForecast(city = 'Dhaka') {
       setForecast7days(res?.data?.daily);
       setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.log(error);
     } finally {
       setLoading(false);

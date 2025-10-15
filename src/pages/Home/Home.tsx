@@ -15,7 +15,6 @@ const Home = () => {
   const { loadingWeather, we } = useWeather(searchQuery);
   const { forecast7days, hourlyForecast, sun, loading } =
     useForecast(searchQuery);
-  console.log(searchQuery);
   const now = new Date();
   const currentHour = new Date(now);
   currentHour.setMinutes(0, 0, 0);
@@ -38,9 +37,6 @@ const Home = () => {
       return itemTime >= nowTime;
     })
     .slice(0, 24);
-
-  console.log(searchQuery, 'searchQuery');
-  console.log(we);
   return (
     <div className='min-h-screen bg-gradient-to-br from-sky-400 via-blue-500 to-indigo-600 dark:from-slate-900 dark:via-gray-900 dark:to-black flex flex-col items-center justify-center px-4 py-8'>
       {/* Weather Search Section */}
